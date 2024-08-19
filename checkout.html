@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - TechSpot</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Completar Compra</h2>
+        <form id="checkout-form" class="mt-4">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Tu nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" placeholder="Tu correo electrónico" required>
+            </div>
+            <div class="form-group">
+                <label for="total">Total a Pagar</label>
+                <input type="text" class="form-control" id="total" value=" $ 150.000 clp " readonly>
+            </div>
+            <h4 class="mt-4">Información de la Tarjeta</h4>
+            <div class="form-group">
+                <label for="cardNumber">Número de la Tarjeta</label>
+                <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="expiryDate">Fecha de Expiración</label>
+                    <input type="text" class="form-control" id="expiryDate" placeholder="MM/AA" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="cvv">CVV</label>
+                    <input type="text" class="form-control" id="cvv" placeholder="123" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Realizar Pago</button>
+        </form>
+        <div id="resultado" class="mt-3"></div>
+    </div>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("YOUR_USER_ID");  // Reemplaza con tu User ID de EmailJS
+        })();
+
+        document.getElementById('checkout-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+
+            // Simular la validación de la tarjeta
+            const cardNumber = document.getElementById('cardNumber').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const cvv = document.getElementById('cvv').value;
+
+            if (validarTarjeta(cardNumber, expiryDate, cvv)) {
+                // Simular la respuesta de un sistema de pago
+                const nombre = document.getElementById('nombre').value;
+                const email = document.getElementById('email').value;
+                const total = document.getElementById('total').value;
+
+                // Mostrar un mensaje de éxito en la página
+                document.getElementById('resultado').innerHTML = `<div class="alert alert-success">Pago simulado completado con éxito para ${nombre}.</div>`;
+
+                // Simular el envío de un correo con los detalles de la compra
+                enviarCorreoCompra(nombre, email, total);
+            } else {
+                // Mostrar un mensaje de error si la validación falla
+                document.getElementById('resultado').innerHTML = `<div class="alert alert-danger">Error en la validación de la tarjeta. Verifica los datos e intenta nuevamente.</div>`;
+            }
+        });
+
+        function validarTarjeta(cardNumber, expiryDate, cvv) {
+            // Simulación de una validación simple
+            const cardNumberRegex = /^[0-9]{16}$/;  // Deben ser 16 dígitos
+            const expiryDateRegex = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;  // Formato MM/AA
+            const cvvRegex = /^[0-9]{3}$/;  // Deben ser 3 dígitos
+
+            return cardNumberRegex.test(cardNumber) && expiryDateRegex.test(expiryDate) && cvvRegex.test(cvv);
+        }
+
+        function enviarCorreoCompra(nombre, email, total) {
+            var templateParams = {
+                nombre_cliente: nombre,
+                email_cliente: email,
+                numero_orden: Math.floor(Math.random() * 1000000),  // Genera un número de orden aleatorio
+                total_compra: total,
+                productos: "Lista de productos comprados (simulado)"
+            };
+
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+            .then(function(response) {
+                console.log('Correo enviado con éxito', response.status, response.text);
+            }, function(error) {
+                console.log('Error en el envío del correo', error);
+            });
+        }
+    </script>
+</body>
+</html>
+

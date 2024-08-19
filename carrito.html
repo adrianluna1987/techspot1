@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - TechSpot</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+<head>
+    <style>
+        body {
+            background-color: #1a1a1a; /* Fondo oscuro */
+            color: #eaeaea; /* Texto claro */
+        }
+
+        .producto h4, .producto p {
+            color: #ffffff; /* Texto blanco para mejor legibilidad */
+        }
+
+        .producto {
+            background-color: #333; /* Fondo oscuro para las tarjetas del producto */
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .img-thumbnail {
+            border: 1px solid #444; /* Borde gris oscuro para imágenes */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Tu Carrito</h2>
+
+        <!-- Botones de navegación -->
+        <div class="d-flex justify-content-between mb-4">
+            <button class="btn btn-secondary" onclick="window.location.href='index.html'">Inicio</button>
+            <button class="btn btn-secondary" onclick="window.location.href='productos.html'">Catálogo de Productos</button>
+            <button class="btn btn-secondary" onclick="window.history.back()">Volver</button>
+        </div>
+
+        <div id="carrito" class="mt-4"></div>
+        <a href="checkout.html" class="btn btn-primary btn-block mt-4">Proceder al Pago</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarCarrito();
+        });
+
+        function cargarCarrito() {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const carritoContainer = document.getElementById('carrito');
+
+            carrito.forEach(function(producto) {
+                const productoDiv = document.createElement('div');
+                productoDiv.classList.add('producto', 'mb-4');
+                productoDiv.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="img/producto${producto.id}.jpg" alt="${producto.nombre}" class="img-thumbnail">
+                        </div>
+                        <div class="col-md-6">
+                            <h4>${producto.nombre}</h4>
+                            <p>Precio: ${producto.precio} </p>
+                            <p>Cantidad: ${producto.cantidad}</p>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <button class="btn btn-danger eliminar-producto" data-id="${producto.id}">Eliminar</button>
+                        </div>
+                    </div>
+                `;
+                carritoContainer.appendChild(productoDiv);
+            });
+
+            // Agregar funcionalidad para eliminar producto
+            const botonesEliminar = document.querySelectorAll('.eliminar-producto');
+            botonesEliminar.forEach(function(boton) {
+                boton.addEventListener('click', function(event) {
+                    const productoID = event.target.dataset.id;
+                    eliminarProductoDelCarrito(productoID);
+                });
+            });
+        }
+
+        function eliminarProductoDelCarrito(id) {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            carrito = carrito.filter(producto => producto.id !== id);
+
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+
+            alert('Producto eliminado del carrito.');
+
+            // Recargar la página para reflejar los cambios
+            location.reload();
+        }
+    </script>
+</body>
+</html>
+

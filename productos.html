@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Productos - TechSpot</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Catálogo de Productos</h2>
+
+        <!-- Botones de navegación -->
+        <div class="d-flex justify-content-between mb-4">
+            <button class="btn btn-secondary" onclick="window.location.href='index.html'">Inicio</button>
+            <button class="btn btn-secondary" onclick="window.location.href='carrito.html'">Carrito de Compras</button>
+            <button class="btn btn-secondary" onclick="window.history.back()">Volver</button>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="img/producto1.jpg" class="card-img-top" alt="Producto 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Producto 1</h5>
+                        <p class="card-text">Descripción breve del producto.</p>
+                        <button class="btn btn-primary agregar-carrito" data-id="1" data-nombre="Producto 1" data-precio="150.000 clp ">Añadir al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="img/producto2.jpg" class="card-img-top" alt="Producto 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Producto 2</h5>
+                        <p class="card-text">Descripción breve del producto.</p>
+                        <button class="btn btn-primary agregar-carrito" data-id="2" data-nombre="Producto 2" data-precio="150.000 clp ">Añadir al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Más productos... -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Selecciona todos los botones de "Añadir al Carrito"
+            const botonesAgregar = document.querySelectorAll('.agregar-carrito');
+
+            // Agrega un evento de clic a cada botón de "Añadir al Carrito"
+            botonesAgregar.forEach(function(boton) {
+                boton.addEventListener('click', function(event) {
+                    const productoID = event.target.dataset.id;
+                    const productoNombre = event.target.dataset.nombre;
+                    const productoPrecio = event.target.dataset.precio;
+
+                    // Crear un objeto de producto
+                    const producto = {
+                        id: productoID,
+                        nombre: productoNombre,
+                        precio: productoPrecio,
+                        cantidad: 1
+                    };
+
+                    // Llamar a la función para agregar el producto al carrito
+                    agregarAlCarrito(producto);
+                });
+            });
+        });
+
+        function agregarAlCarrito(producto) {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+            // Verificar si el producto ya existe en el carrito
+            const productoExistente = carrito.find(item => item.id === producto.id);
+
+            if (productoExistente) {
+                // Incrementar la cantidad si el producto ya existe
+                productoExistente.cantidad++;
+            } else {
+                // Agregar el producto al carrito si no existe
+                carrito.push(producto);
+            }
+
+            // Guardar el carrito actualizado en localStorage
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+
+            alert(`${producto.nombre} ha sido añadido al carrito.`);
+        }
+    </script>
+</body>
+</html>
+

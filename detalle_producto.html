@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Producto - TechSpot</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Detalle del Producto</h2>
+
+        <!-- Botones de navegación -->
+        <div class="d-flex justify-content-between mb-4">
+            <button class="btn btn-secondary" onclick="window.location.href='index.html'">Inicio</button>
+            <button class="btn btn-secondary" onclick="window.location.href='carrito.html'">Carrito de Compras</button>
+            <button class="btn btn-secondary" onclick="window.history.back()">Volver</button>
+        </div>
+
+        <!-- Detalles del producto -->
+        <div class="row">
+            <div class="col-md-6">
+                <img src="img/producto1.jpg" class="img-fluid" alt="Producto 1">
+            </div>
+            <div class="col-md-6">
+                <h3>Nombre del Producto 1</h3>
+                <p>Descripción completa del producto, sus características, especificaciones, etc.</p>
+                <p><strong>Precio:</strong> 150.000 clp </p>
+                <button class="btn btn-primary" id="agregar-carrito" data-id="1" data-nombre="Producto 1" data-precio="150.00 clp ">Añadir al Carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Capturar el botón "Añadir al Carrito"
+            const botonAgregar = document.getElementById('agregar-carrito');
+
+            // Agregar evento de clic al botón
+            botonAgregar.addEventListener('click', function(event) {
+                const productoID = event.target.dataset.id;
+                const productoNombre = event.target.dataset.nombre;
+                const productoPrecio = event.target.dataset.precio;
+
+                // Crear un objeto de producto
+                const producto = {
+                    id: productoID,
+                    nombre: productoNombre,
+                    precio: productoPrecio,
+                    cantidad: 1
+                };
+
+                // Llamar a la función para agregar el producto al carrito
+                agregarAlCarrito(producto);
+            });
+        });
+
+        function agregarAlCarrito(producto) {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+            // Verificar si el producto ya existe en el carrito
+            const productoExistente = carrito.find(item => item.id === producto.id);
+
+            if (productoExistente) {
+                // Incrementar la cantidad si el producto ya existe
+                productoExistente.cantidad++;
+            } else {
+                // Agregar el producto al carrito si no existe
+                carrito.push(producto);
+            }
+
+            // Guardar el carrito actualizado en localStorage
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+
+            alert(`${producto.nombre} ha sido añadido al carrito.`);
+        }
+    </script>
+</body>
+</html>
+

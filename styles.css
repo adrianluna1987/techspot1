@@ -1,0 +1,204 @@
+/* styles.css */
+
+/* CSS Reset - Meyer */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/*  estilos personalizados */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+.producto {
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.producto img {
+    max-width: 100%;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+    background-color: #0ab68b;
+    border-color: #0ab68b;
+}
+
+.btn-success {
+    background-color: #0ab68b;
+    border-color: #0ab68b;
+}
+
+.btn-success:hover {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+/* Estilos generales */
+body {
+    background-color: #1a1a1a; /* Fondo oscuro elegante */
+    color: #f3f2f2; /* Texto claro para contraste */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 20px;
+}
+
+/* Estilos para botones */
+.btn-primary {
+    background-color: #0d6efd; /* Azul para botones principales */
+    border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
+}
+
+.btn-secondary {
+    background-color: #333; /* Gris oscuro para botones secundarios */
+    border-color: #333;
+}
+
+.btn-secondary:hover {
+    background-color: #555; /* Gris más claro al pasar el ratón */
+}
+
+/* Estilos para la tarjeta de producto */
+.card {
+    background-color: #333; /* Fondo de la tarjeta en gris oscuro */
+    border: none;
+}
+
+.card-body {
+    color: #131212; /* Texto claro dentro de la tarjeta */
+}
+
+h2, h3, p {
+    color: #0c0b0b; /* Títulos y texto con color claro */
+}
+
+/* Estilos para el contenedor de imágenes */
+.img-fluid {
+    border-radius: 10px;
+    border: 1px solid #444; /* Borde sutil para las imágenes */
+}
+/* Estilos generales para los formularios */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1f66ad;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #2d71b4;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    color: #e49292;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}

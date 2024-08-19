@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Productos - TechSpot</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Buscar Productos</h2>
+        <form id="busqueda-form" action="search.php" method="GET" novalidate>
+            <div class="form-group">
+                <label for="query">¿Qué estás buscando?</label>
+                <input type="text" class="form-control" id="query" name="query" placeholder="Busca productos..." required>
+                <div class="invalid-feedback">Por favor, ingresa un término de búsqueda.</div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Buscar</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('busqueda-form').addEventListener('submit', function(event) {
+            this.classList.add('was-validated');
+        });
+    </script>
+</body>
+</html>
